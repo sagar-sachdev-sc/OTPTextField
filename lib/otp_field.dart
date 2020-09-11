@@ -114,7 +114,7 @@ class _OTPTextFieldState extends State<OTPTextField> {
         obscureText: widget.obscureText,
         decoration: InputDecoration(
             counterText: "",
-            border: widget.fieldStyle == FieldStyle.box
+            border: widget.fieldStyle == FieldStyle.image
                 ? OutlineInputBorder(borderSide: BorderSide(width: 10.0, color: Colors.green))
                 : null),
         onChanged: (String str) {
