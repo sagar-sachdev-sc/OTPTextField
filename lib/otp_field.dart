@@ -115,7 +115,7 @@ class _OTPTextFieldState extends State<OTPTextField> {
         decoration: InputDecoration(
             counterText: "",
             border: widget.fieldStyle == FieldStyle.box
-                ? OutlineInputBorder(borderSide: BorderSide(width: 2.0, color: Colors.green))
+                ? OutlineInputBorder(borderSide: BorderSide(width: 10.0, color: Colors.green))
                 : null),
         onChanged: (String str) {
           // Check if the current value at this position is empty
