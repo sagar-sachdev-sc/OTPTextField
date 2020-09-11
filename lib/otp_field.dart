@@ -103,8 +103,8 @@ class _OTPTextFieldState extends State<OTPTextField> {
       _textControllers[i] = new TextEditingController();
 
     return Container(
-      width: widget.fieldWidth,
-      height: widget.fieldWidth,
+      width: MediaQuery.of(context).size.width / 0.1,
+      height: MediaQuery.of(context).size.width / 0.1,
       child: Stack(children: <Widget>[
         Image.asset('assets/images/ffoutline.png'),
         TextField(
