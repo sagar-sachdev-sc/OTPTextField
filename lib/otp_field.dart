@@ -104,6 +104,7 @@ class _OTPTextFieldState extends State<OTPTextField> {
 
     return Container(
       width: widget.fieldWidth,
+      height: widget.fieldWidth,
       child: Stack(children: <Widget>[
         Image.asset('assets/images/ffoutline.png'),
         TextField(
