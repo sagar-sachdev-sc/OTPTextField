@@ -103,66 +103,69 @@ class _OTPTextFieldState extends State<OTPTextField> {
       _textControllers[i] = new TextEditingController();
 
     return Container(
-      width: 90.0,
-      height: 90.0,
+      width: 75.0,
+      height: 75.0,
       child: Stack(children: <Widget>[
         Padding(
-          padding: const EdgeInsets.only(left:5.0, bottom: 30.0
+          padding: const EdgeInsets.only(left:5.0, bottom: 12.0
           ),
           child: Image.asset('assets/images/ffoutline.png'),
         ),
-        TextField(
-          controller: _textControllers[i],
-          keyboardType: widget.keyboardType,
-          textAlign: TextAlign.center,
-          maxLength: 1,
-          style: widget.style,
-          focusNode: _focusNodes[i],
-          obscureText: widget.obscureText,
-          decoration: InputDecoration(
-            counterText: "",
-            border: InputBorder.none,
-            // border: widget.fieldStyle == FieldStyle.image
-            //     ? OutlineInputBorder(
-            //         borderSide: BorderSide(width: 10.0, color: Colors.orange))
-            //     : null),
+        Padding(
+          padding: const EdgeInsets.only(bottom:8.0),
+          child: TextField(
+            controller: _textControllers[i],
+            keyboardType: widget.keyboardType,
+            textAlign: TextAlign.center,
+            maxLength: 1,
+            style: widget.style,
+            focusNode: _focusNodes[i],
+            obscureText: widget.obscureText,
+            decoration: InputDecoration(
+              counterText: "",
+              border: InputBorder.none,
+              // border: widget.fieldStyle == FieldStyle.image
+              //     ? OutlineInputBorder(
+              //         borderSide: BorderSide(width: 10.0, color: Colors.orange))
+              //     : null),
+            ),
+            onChanged: (String str) {
+              // Check if the current value at this position is empty
+              // If it is move focus to previous text field.
+              if (str.isEmpty) {
+                if (i == 0) return;
+                _focusNodes[i].unfocus();
+                _focusNodes[i - 1].requestFocus();
+              }
+
+              // Update the current pin
+              setState(() {
+                _pin[i] = str;
+              });
+
+              // Remove focus
+              if (str.isNotEmpty) _focusNodes[i].unfocus();
+              // Set focus to the next field if available
+              if (i + 1 != widget.length && str.isNotEmpty)
+                FocusScope.of(context).requestFocus(_focusNodes[i + 1]);
+
+              String currentPin = "";
+              _pin.forEach((String value) {
+                currentPin += value;
+              });
+
+              // if there are no null values that means otp is completed
+              // Call the `onCompleted` callback function provided
+              if (!_pin.contains(null) &&
+                  !_pin.contains('') &&
+                  currentPin.length == widget.length) {
+                widget.onCompleted(currentPin);
+              }
+
+              // Call the `onChanged` callback function
+              widget.onChanged(currentPin);
+            },
           ),
-          onChanged: (String str) {
-            // Check if the current value at this position is empty
-            // If it is move focus to previous text field.
-            if (str.isEmpty) {
-              if (i == 0) return;
-              _focusNodes[i].unfocus();
-              _focusNodes[i - 1].requestFocus();
-            }
-
-            // Update the current pin
-            setState(() {
-              _pin[i] = str;
-            });
-
-            // Remove focus
-            if (str.isNotEmpty) _focusNodes[i].unfocus();
-            // Set focus to the next field if available
-            if (i + 1 != widget.length && str.isNotEmpty)
-              FocusScope.of(context).requestFocus(_focusNodes[i + 1]);
-
-            String currentPin = "";
-            _pin.forEach((String value) {
-              currentPin += value;
-            });
-
-            // if there are no null values that means otp is completed
-            // Call the `onCompleted` callback function provided
-            if (!_pin.contains(null) &&
-                !_pin.contains('') &&
-                currentPin.length == widget.length) {
-              widget.onCompleted(currentPin);
-            }
-
-            // Call the `onChanged` callback function
-            widget.onChanged(currentPin);
-          },
         ),
       ]),
     );
