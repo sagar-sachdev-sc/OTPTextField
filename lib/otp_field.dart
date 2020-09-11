@@ -107,7 +107,7 @@ class _OTPTextFieldState extends State<OTPTextField> {
       height: 50.0,
       child: Stack(children: <Widget>[
         Padding(
-          padding: const EdgeInsets.only(left:2.5),
+          padding: const EdgeInsets.only(left:2.5, bottom: 4.0),
           child: Image.asset('assets/images/ffoutline.png'),
         ),
         TextField(
