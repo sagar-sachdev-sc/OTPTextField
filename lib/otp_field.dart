@@ -103,8 +103,8 @@ class _OTPTextFieldState extends State<OTPTextField> {
       _textControllers[i] = new TextEditingController();
 
     return Container(
-      width: 50.0,
-      height: 50.0,
+      width: 90.0,
+      height: 90.0,
       child: Stack(children: <Widget>[
         Padding(
           padding: const EdgeInsets.only(left:5.0, bottom: 6.0
