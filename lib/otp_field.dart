@@ -103,8 +103,8 @@ class _OTPTextFieldState extends State<OTPTextField> {
       _textControllers[i] = new TextEditingController();
 
     return Container(
-      width: 70.0,
-      height: 70.0,
+      width: 66.0,
+      height: 66.0,
       child: Stack(children: <Widget>[
         Padding(
           padding: const EdgeInsets.only(left:5.0,
@@ -112,7 +112,7 @@ class _OTPTextFieldState extends State<OTPTextField> {
           child: Image.asset('assets/images/ffoutline.png'),
         ),
         Padding(
-          padding: const EdgeInsets.only(top:16.0),
+          padding: const EdgeInsets.only(top:14.0),
           child: TextField(
             controller: _textControllers[i],
             keyboardType: widget.keyboardType,
